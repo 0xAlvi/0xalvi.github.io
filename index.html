@@ -3,318 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Receipt Generator By HCA</title>
+    <title>Receipt Generator By HCA</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5; 
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #invoice-POS {
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            margin: 20px auto;
-            width: 70mm; 
-            background: #FFF; 
-            color: #000; 
-            border-radius: 5px; 
-        }
-
-        h2 {
-            font-size: 1.2em; 
-            margin: 5px 0;
-            text-align: center;
-        }
-
-        p {
-            font-size: 0.9em;
-            color: #000;
-            line-height: 1.2em;
-            margin: 0;
-            text-align: center;
-        }
-
-        #top, #mid, #bot {
-            border-bottom: 1px solid #EEE;
-            padding-bottom: 5px;
-            margin-bottom: 5px;
-        }
-
-        #top { min-height: 60px; }
-        #mid { min-height: 80px; } 
-        #bot { min-height: 50px; }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .tabletitle {
-            font-size: 0.8em; 
-            background: #EEE;
-            text-align: left;
-            padding: 5px;
-        }
-
-        .service {
-            border-bottom: 1px solid #EEE;
-        }
-
-        .item {
-            width: 24mm;
-        }
-
-        .itemtext {
-            font-size: 0.7em; 
-        }
-
-        #legalcopy {
-            margin-top: 5mm;
-            text-align: center;
-            font-size: 0.8em; 
-        }
-
-        button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            transition: background-color 0.3s; 
-        }
-
-        button:hover {
-            background-color: #45a049; 
-        }
-
-        .barcode {
-            margin: 10px auto;
-            text-align: center;
-            max-width: 60mm;
-        }
-
-        .input-container {
-            text-align: center; 
-            margin-bottom: 20px; 
-        }
-
-        input {
-            padding: 10px;
-            font-size: 16px;
-            width: 200px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px; 
-            margin-right: 10px; 
-        }
+        body { display: flex; flex-direction: column; align-items: center; font-family: Arial, sans-serif; background-color: #e8f5e9; margin: 0; padding: 20px; }
+        h1 { font-size: 2em; margin-bottom: 10px; color: #388e3c; text-align: center; }
+        .telegram-link { font-size: 1em; color: #2196F3; text-decoration: none; margin-bottom: 20px; }
+        #a { box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); padding: 20px; margin: 20px auto; width: 70mm; background: #fff; color: #000; border-radius: 10px; }
+        h2 { font-size: 1.5em; margin: 5px 0; text-align: center; }
+        p { font-size: 0.9em; color: #333; line-height: 1.4em; margin: 0; text-align: center; }
+        #b, #c, #d { border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; }
+        #b { min-height: 60px; } #c { min-height: 80px; } #d { min-height: 50px; }
+        table { width: 100%; border-collapse: collapse; }
+        .e { font-size: 0.9em; background: #f0f0f0; text-align: left; padding: 5px; }
+        .f { border-bottom: 1px solid #ddd; }
+        .g { width: 24mm; }
+        .h { font-size: 0.8em; }
+        #i { margin-top: 5mm; text-align: center; font-size: 0.9em; }
+        button { display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #2196F3; color: white; border: none; border-radius: 5px; transition: background-color 0.3s; }
+        button:hover { background-color: #1976D2; }
+        .j { margin: 10px auto; text-align: center; max-width: 60mm; }
+        .k { text-align: center; margin-bottom: 20px; }
+        input { padding: 10px; font-size: 16px; width: 200px; border: 1px solid #ccc; border-radius: 5px; margin-right: 10px; }
+        .l { font-size: 0.8em; margin-top: 20px; text-align: center; color: #555; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
-<h1>Store Receipt Generator By HCA</h1> 
+<h1>Receipt Generator By HCA</h1> 
+<a href="https://t.me/HappyCuanAirdrop" class="telegram-link" target="_blank">Telegram: https://t.me/HappyCuanAirdrop</a>
 
-<div class="input-container">
-    <input type="text" id="storeNameInput" placeholder="Enter store name" />
-    <button id="generateBtn">Generate Receipt</button>
+<div class="k">
+    <input type="text" id="m" placeholder="Enter store name" />
+    <button id="n">Generate Receipt</button>
 </div>
 
-<div id="invoice-POS">
-    <center id="top">
+<div id="a">
+    <center id="b">
         <div class="info"> 
-            <h2 id="storeName">Supermarket Store</h2>
-            <svg class="barcode" id="barcode"></svg>
-        </div><!--End Info-->
-    </center><!--End InvoiceTop-->
-    
-    <div id="mid">
-        <div class="info" id="storeInfo">
-            <p id="address">Address: </p>
-            <p id="phone">Phone: </p>
+            <h2 id="o">Supermarket Store</h2>
+            <p id="p">https://supermarket/store</p>
+            <p id="q"></p>
+            <svg class="j" id="r"></svg>
         </div>
-    </div><!--End Invoice Mid-->
+    </center>
     
-    <div id="bot">
-        <div id="table">
+    <div id="c">
+        <div class="info" id="s">
+            <p id="t">Address: </p>
+            <p id="u">Phone: </p>
+        </div>
+    </div>
+    
+    <div id="d">
+        <div id="v">
             <table>
-                <tr class="tabletitle">
-                    <td class="item"><h2>Item</h2></td>
+                <tr class="e">
+                    <td class="g"><h2>Item</h2></td>
                     <td class="Hours"><h2>Qty</h2></td>
                     <td class="Rate"><h2>Sub Total</h2></td>
                 </tr>
-                <!-- Items will be dynamically inserted here -->
             </table>
-        </div><!--End Table-->
+        </div>
 
-        <div id="legalcopy">
+        <div id="i">
             <p><strong>Thank you for your business!</strong> Payment is expected within 31 days.</p>
         </div>
-    </div><!--End InvoiceBot-->
-</div><!--End Invoice-->
+    </div>
+</div>
 
-<button id="downloadBtn">Download Receipt</button>
+<button id="w">Download Receipt</button>
+
+<div class="l">
+    <p>&copy; 2024 Happy Cuan Airdrop</p>
+</div>
 
 <script>
-    const items = [
-        { name: "Milk", price: 3.50 },
-        { name: "Bread", price: 2.00 },
-        { name: "Eggs", price: 2.50 },
-        { name: "Sugar", price: 1.50 },
-        { name: "Rice", price: 1.75 },
-        { name: "Chicken", price: 5.00 },
-        { name: "Fish", price: 6.00 },
-        { name: "Cheese", price: 4.00 },
-        { name: "Chocolate", price: 2.25 },
-        { name: "Coffee", price: 3.00 },
-        { name: "Tea", price: 2.00 },
-        { name: "Juice", price: 1.50 },
-        { name: "Yogurt", price: 2.00 },
-        { name: "Butter", price: 3.25 },
-        { name: "Pasta", price: 1.50 },
-        { name: "Cereal", price: 3.75 },
-        { name: "Ice Cream", price: 4.00 },
-        { name: "Snacks", price: 1.25 },
-        { name: "Vegetables", price: 2.50 },
-        { name: "Fruits", price: 3.00 },
-        { name: "Nuts", price: 4.50 },
-        { name: "Chips", price: 1.75 },
-        { name: "Ketchup", price: 2.00 },
-        { name: "Mustard", price: 1.50 },
-        { name: "Vinegar", price: 1.00 },
-        { name: "Olive Oil", price: 6.00 },
-        { name: "Sauces", price: 2.50 },
-        { name: "Frozen Meals", price: 5.50 },
-        { name: "Candy", price: 1.00 },
-        { name: "Baking Powder", price: 0.75 },
-        { name: "Baking Soda", price: 0.50 },
-        { name: "Pickles", price: 2.00 },
-        { name: "Relish", price: 1.75 },
-        { name: "Salad Dressing", price: 2.50 },
-        { name: "Porridge", price: 3.00 },
+    const x = [
+        { n: "Milk", p: 3.50 }, { n: "Bread", p: 2.00 }, { n: "Eggs", p: 2.50 }, 
+        { n: "Sugar", p: 1.50 }, { n: "Rice", p: 1.75 }, { n: "Chicken", p: 5.00 },
+        { n: "Fish", p: 6.00 }, { n: "Cheese", p: 4.00 }, { n: "Chocolate", p: 2.25 }, 
+        { n: "Coffee", p: 3.00 }, { n: "Tea", p: 2.00 }, { n: "Juice", p: 1.50 }, 
+        { n: "Yogurt", p: 2.00 }, { n: "Butter", p: 3.25 }, { n: "Pasta", p: 1.50 },
+        { n: "Cereal", p: 3.75 }, { n: "Ice Cream", p: 4.00 }, { n: "Snacks", p: 1.25 },
+        { n: "Vegetables", p: 2.50 }, { n: "Fruits", p: 3.00 }, { n: "Nuts", p: 4.50 },
+        { n: "Chips", p: 1.75 }, { n: "Ketchup", p: 2.00 }, { n: "Mustard", p: 1.50 },
+        { n: "Vinegar", p: 1.00 }, { n: "Olive Oil", p: 6.00 }, { n: "Sauces", p: 2.50 },
+        { n: "Frozen Meals", p: 5.50 }, { n: "Candy", p: 1.00 }, { n: "Baking Powder", p: 0.75 },
+        { n: "Baking Soda", p: 0.50 }, { n: "Pickles", p: 2.00 }, { n: "Relish", p: 1.75 },
+        { n: "Salad Dressing", p: 2.50 }, { n: "Porridge", p: 3.00 }
     ];
 
-    const randomStores = [
-        { address: "123 Market St, Los Angeles, CA 90001", phone: "(213) 555-0199" },
-    	{ address: "456 Super St, Chicago, IL 60601", phone: "(312) 555-0144" },
-    	{ address: "789 Shopping Ave, New York, NY 10001", phone: "(646) 555-0123" },
-    	{ address: "321 Convenience Blvd, Miami, FL 33101", phone: "(305) 555-0178" },
-    	{ address: "654 Discount Rd, Dallas, TX 75201", phone: "(214) 555-0111" },
-    	{ address: "111 Deal Rd, Seattle, WA 98101", phone: "(206) 555-0188" },
-    	{ address: "222 Food St, San Francisco, CA 94101", phone: "(415) 555-0166" },
-    	{ address: "333 Greenway Dr, Boston, MA 02101", phone: "(617) 555-0134" },
-    	{ address: "444 Urban St, Atlanta, GA 30301", phone: "(404) 555-0155" },
-    	{ address: "1212 Galaxy St, Minneapolis, MN 55401", phone: "(612) 555-0138" },
-    	{ address: "1313 Local Ave, Las Vegas, NV 89101", phone: "(702) 555-0171" },
-    	{ address: "1414 Hub Rd, Nashville, TN 37201", phone: "(615) 555-0139" },
-    	{ address: "1515 Grocery Blvd, Baltimore, MD 21201", phone: "(410) 555-0156" },
-    	{ address: "1616 Neighborhood St, Indianapolis, IN 46201", phone: "(317) 555-0162" },
-    	{ address: "1717 Saver Rd, Charlotte, NC 28201", phone: "(704) 555-0181" },
-    	{ address: "1818 Choice Blvd, Kansas City, MO 64101", phone: "(816) 555-0174" },
-    	{ address: "1919 Central St, Omaha, NE 68101", phone: "(402) 555-0116" },
-    	{ address: "2020 Select Rd, Tucson, AZ 85701", phone: "(520) 555-0191" },
-    	{ address: "2121 Foodie Ln, Portland, OR 97201", phone: "(503) 555-0182" },
-    	{ address: "2222 Green St, San Diego, CA 92101", phone: "(619) 555-0183" },
-    	{ address: "2323 Fancy Ave, Philadelphia, PA 19101", phone: "(215) 555-0184" },
-    	{ address: "2424 Saver Way, Phoenix, AZ 85001", phone: "(602) 555-0185" },
-    	{ address: "2525 Chef Blvd, San Antonio, TX 78201", phone: "(210) 555-0186" },
-    	{ address: "2626 Basic St, Austin, TX 78701", phone: "(512) 555-0187" },
-    	{ address: "2727 Flavor Ln, Columbus, OH 43201", phone: "(614) 555-0188" },
-    	{ address: "2828 Offer St, Atlanta, GA 30301", phone: "(404) 555-0189" },
-    	{ address: "2929 Urban Blvd, Detroit, MI 48201", phone: "(313) 555-0190" },
-    	{ address: "3030 Trail Rd, Seattle, WA 98101", phone: "(206) 555-0191" },
+    const y = [
+        { a: "123 Market St, Los Angeles, CA 90001", b: "(213) 555-0199" },
+        { a: "456 Super St, Chicago, IL 60601", b: "(312) 555-0144" },
+        { a: "789 Shopping Ave, New York, NY 10001", b: "(646) 555-0123" },
+        { a: "321 Convenience Blvd, Miami, FL 33101", b: "(305) 555-0178" },
+        { a: "654 Discount Rd, Dallas, TX 75201", b: "(214) 555-0111" },
+        { a: "111 Deal Rd, Seattle, WA 98101", b: "(206) 555-0188" },
+        { a: "222 Food St, San Francisco, CA 94101", b: "(415) 555-0166" },
+        { a: "333 Greenway Dr, Boston, MA 02101", b: "(617) 555-0155" },
+        { a: "444 Fresh St, Denver, CO 80201", b: "(303) 555-0191" },
+        { a: "555 Bright St, San Diego, CA 92101", b: "(619) 555-0142" },
+        { a: "666 Hilltop Rd, Portland, OR 97201", b: "(503) 555-0125" },
+        { a: "777 Central Blvd, Washington, D.C. 20001", b: "(202) 555-0145" }
     ];
 
-    function getRandomStore() {
-        return randomStores[Math.floor(Math.random() * randomStores.length)];
+    function z() { return y[Math.floor(Math.random() * y.length)]; }
+    
+    function A(b) {
+        JsBarcode("#r", b, { format: "CODE39", lineColor: "#000", width: 2, height: 40, displayValue: false });
     }
 
-    function generateBarcode(value) {
-        JsBarcode("#barcode", value, {
-            format: "CODE128",
-            displayValue: true,
-            fontSize: 8, 
-            width: 1,
-            height: 30 
-        });
-    }
-
-    function generateReceipt() {
-        const table = document.querySelector("#table table");
-        table.innerHTML = `
-            <tr class="tabletitle">
-                <td class="item"><h2>Item</h2></td>
-                <td class="Hours"><h2>Qty</h2></td>
-                <td class="Rate"><h2>Sub Total</h2></td>
-            </tr>
-        `; // Reset table
-
-        const storeInfo = getRandomStore();
-        const storeNameInput = document.getElementById('storeNameInput').value || "Supermarket Store";
-        document.getElementById('storeName').innerText = storeNameInput;
-        document.getElementById('address').innerText = `Address: ${storeInfo.address}`;
-        document.getElementById('phone').innerText = `Phone: ${storeInfo.phone}`;
-
+    function B() {
+        const C = document.querySelector("#v table");
+        C.innerHTML = `<tr class="e"><td class="g"><h2>Item</h2></td><td class="Hours"><h2>Qty</h2></td><td class="Rate"><h2>Sub Total</h2></td></tr>`;
+        const D = z();
+        const E = document.getElementById('m').value || "Supermarket Store";
+        document.getElementById('o').innerText = E;
+        const F = E.toLowerCase().replace(/\s+/g, '');
+        document.getElementById('p').innerText = `https://${F}/shop`;
+        document.getElementById('t').innerText = `Address: ${D.a}`;
+        document.getElementById('u').innerText = `Phone: ${D.b}`;
+        const G = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+        document.getElementById('q').innerText = G.toLocaleString('en-US', options);
         let total = 0;
-        const numItems = Math.floor(Math.random() * 5) + 2; 
+        const numItems = Math.floor(Math.random() * 5) + 2;
 
         for (let i = 0; i < numItems; i++) {
-            const item = items[Math.floor(Math.random() * items.length)];
-            const qty = Math.floor(Math.random() * 3) + 1; 
-            const subtotal = (item.price * qty).toFixed(2);
+            const H = x[Math.floor(Math.random() * x.length)];
+            const I = Math.floor(Math.random() * 3) + 1;
+            const subtotal = (H.p * I).toFixed(2);
             total += parseFloat(subtotal);
-
             const row = document.createElement('tr');
-            row.className = 'service';
-            row.innerHTML = `
-                <td class="tableitem"><p class="itemtext">${item.name}</p></td>
-                <td class="tableitem"><p class="itemtext">${qty}</p></td>
-                <td class="tableitem"><p class="itemtext">$${subtotal}</p></td>
-            `;
-            table.appendChild(row);
+            row.className = 'f';
+            row.innerHTML = `<td class="tableitem"><p class="h">${H.n}</p></td><td class="tableitem"><p class="h">${I}</p></td><td class="tableitem"><p class="h">$${subtotal}</p></td>`;
+            C.appendChild(row);
         }
 
         const totalRow = document.createElement('tr');
-        totalRow.className = 'tabletitle';
-        totalRow.innerHTML = `
-            <td></td>
-            <td class="Rate"><h2>Total</h2></td>
-            <td class="payment"><h2>$${total.toFixed(2)}</h2></td>
-        `;
-        table.appendChild(totalRow);
-
-        // Generate a random barcode value
-        const randomBarcodeValue = Math.random().toString(36).substring(2, 15);
-        generateBarcode(randomBarcodeValue);
+        totalRow.className = 'e';
+        totalRow.innerHTML = `<td></td><td class="Rate"><h2>Total</h2></td><td class="payment"><h2>$${total.toFixed(2)}</h2></td>`;
+        C.appendChild(totalRow);
+        const J = Math.random().toString(36).substring(2, 15);
+        A(J);
     }
 
-    function downloadReceipt() {
-        const element = document.getElementById("invoice-POS");
-        html2canvas(element, { scale: 2 }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'receipt.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
+    document.getElementById('n').addEventListener('click', B);
+
+    document.getElementById('w').addEventListener('click', () => {
+        html2canvas(document.querySelector("#a")).then(canvas => {
+            const K = document.createElement('a');
+            K.download = 'receipt.png';
+            K.href = canvas.toDataURL();
+            K.click();
         });
-    }
-
-    document.getElementById('generateBtn').addEventListener('click', generateReceipt);
-    document.getElementById('downloadBtn').addEventListener('click', downloadReceipt);
+    });
 </script>
-
 </body>
 </html>
