@@ -5,26 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt Generator By HCA</title>
     <style>
-        body { display: flex; flex-direction: column; align-items: center; font-family: Arial, sans-serif; background-color: #e8f5e9; margin: 0; padding: 20px; }
-        h1 { font-size: 2em; margin-bottom: 10px; color: #388e3c; text-align: center; }
-        .telegram-link { font-size: 1em; color: #2196F3; text-decoration: none; margin-bottom: 20px; }
-        #a { padding: 20px; margin: 20px auto; width: 70mm; background: #fff; color: #000; border-radius: 10px; }
-        h2 { font-size: 1.5em; margin: 5px 0; text-align: center; }
-        p { font-size: 0.9em; color: #333; line-height: 1.4em; margin: 0; text-align: center; }
-        #b, #c, #d { border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; }
-        #b { min-height: 60px; } #c { min-height: 80px; } #d { min-height: 50px; }
-        table { width: 100%; border-collapse: collapse; }
-        .e { font-size: 0.9em; background: #f0f0f0; text-align: left; padding: 5px; }
-        .f { border-bottom: 1px solid #ddd; }
-        .g { width: 24mm; }
-        .h { font-size: 0.8em; }
-        #i { margin-top: 5mm; text-align: center; font-size: 0.9em; }
-        button { display: block; margin: 10px auto; padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #2196F3; color: white; border: none; border-radius: 5px; transition: background-color 0.3s; }
-        button:hover { background-color: #1976D2; }
-        .j { margin: 10px auto; text-align: center; max-width: 60mm; }
-        .k { text-align: center; margin-bottom: 20px; }
-        input { padding: 10px; font-size: 16px; width: 200px; border: 1px solid #ccc; border-radius: 5px; margin-right: 10px; }
-        .l { font-size: 0.8em; margin-top: 20px; text-align: center; color: #555; }
+        body{display:flex;flex-direction:column;align-items:center;font-family:'Lucida Console','Courier New',monospace;background-color:#e8f5e9;margin:0;padding:20px;}
+        h1{font-size:2em;margin-bottom:10px;color:#388e3c;text-align:center;}
+        .telegram-link{font-size:1em;color:#2196F3;text-decoration:none;margin-bottom:20px;}
+        #receipt{padding:10px;margin:20px auto;width:70mm;background:#fff;color:#000;border-radius:10px;}
+        h2{font-size:1.2em;margin:5px 0;text-align:center;}
+        p{font-size:0.9em;color:#333;line-height:1.4em;margin:0;text-align:center;}
+        #info,#details,#items{border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:10px;}
+        #info{min-height:60px;}
+        #details{min-height:80px;}
+        #items{min-height:50px;}
+        table{width:100%;border-collapse:collapse;}
+        .header{font-size:0.9em;background:#f0f0f0;text-align:left;padding:5px;}
+        .row{border-bottom:1px solid #ddd;}
+        .item-name{width:24mm;}
+        .footer{margin-top:5mm;text-align:center;font-size:0.9em;}
+        button{display:block;margin:10px auto;padding:10px 20px;font-size:16px;cursor:pointer;background-color:#2196F3;color:white;border:none;border-radius:5px;transition:background-color 0.3s;}
+        button:hover{background-color:#1976D2;}
+        .footer-note{font-size:0.8em;margin-top:20px;text-align:center;color:#555;}
+        #storeName{width:250px;height:40px;padding:5px;font-size:1em;border:1px solid #ccc;border-radius:5px;margin-bottom:10px;}
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -34,133 +33,123 @@
 <h1>Receipt Generator By HCA</h1> 
 <a href="https://t.me/HappyCuanAirdrop" class="telegram-link" target="_blank">Telegram: https://t.me/HappyCuanAirdrop</a>
 
-<div class="k">
-    <input type="text" id="m" placeholder="Enter store name" />
-    <button id="n">Generate Receipt</button>
+<div>
+    <input type="text" id="storeName" placeholder="Enter store name" />
+    <button id="generateReceipt">Generate Receipt</button>
 </div>
 
-<div id="a">
-    <center id="b">
+<div id="receipt">
+    <center id="info">
         <div class="info"> 
-            <h2 id="o">Supermarket Store</h2>
-            <p id="p">https://supermarket/store</p>
-            <p id="q"></p>
-            <svg class="j" id="r"></svg>
+            <h2 id="storeTitle">Supermarket Store</h2>
+            <p id="storeURL">https://supermarket/store</p>
+            <p id="timestamp"></p>
+            <svg class="barcode" id="barcode"></svg>
         </div>
     </center>
     
-    <div id="c">
-        <div class="info" id="s">
-            <p id="t">Address: </p>
-            <p id="u">Phone: </p>
+    <div id="details">
+        <div class="info" id="contactDetails">
+            <p id="address">Address: </p>
+            <p id="phone">Phone: </p>
         </div>
     </div>
     
-    <div id="d">
-        <div id="v">
+    <div id="items">
+        <div id="itemList">
             <table>
-                <tr class="e">
-                    <td class="g"><h2>Item</h2></td>
-                    <td class="Hours"><h2>Qty</h2></td>
-                    <td class="Rate"><h2>Sub Total</h2></td>
+                <tr class="header">
+                    <td class="item-name"><h2>Item</h2></td>
+                    <td class="quantity"><h2>Qty</h2></td>
+                    <td class="subtotal"><h2>Sub Total</h2></td>
                 </tr>
             </table>
         </div>
 
-        <div id="i">
+        <div class="footer">
             <p><strong>Thank you for your business!</strong> Payment is expected within 31 days.</p>
         </div>
     </div>
 </div>
 
-<button id="w">Download Receipt</button>
+<button id="downloadReceipt">Download Receipt</button>
 
-<div class="l">
+<div class="footer-note">
     <p>&copy; 2024 Happy Cuan Airdrop</p>
 </div>
 
 <script>
-    const x = [
-        { n: "Milk", p: 3.50 }, { n: "Bread", p: 2.00 }, { n: "Eggs", p: 2.50 }, 
-        { n: "Sugar", p: 1.50 }, { n: "Rice", p: 1.75 }, { n: "Chicken", p: 5.00 },
-        { n: "Fish", p: 6.00 }, { n: "Cheese", p: 4.00 }, { n: "Chocolate", p: 2.25 }, 
-        { n: "Coffee", p: 3.00 }, { n: "Tea", p: 2.00 }, { n: "Juice", p: 1.50 }, 
-        { n: "Yogurt", p: 2.00 }, { n: "Butter", p: 3.25 }, { n: "Pasta", p: 1.50 },
-        { n: "Cereal", p: 3.75 }, { n: "Ice Cream", p: 4.00 }, { n: "Snacks", p: 1.25 },
-        { n: "Vegetables", p: 2.50 }, { n: "Fruits", p: 3.00 }, { n: "Nuts", p: 4.50 },
-        { n: "Chips", p: 1.75 }, { n: "Ketchup", p: 2.00 }, { n: "Mustard", p: 1.50 },
-        { n: "Vinegar", p: 1.00 }, { n: "Olive Oil", p: 6.00 }, { n: "Sauces", p: 2.50 },
-        { n: "Frozen Meals", p: 5.50 }, { n: "Candy", p: 1.00 }, { n: "Baking Powder", p: 0.75 },
-        { n: "Baking Soda", p: 0.50 }, { n: "Pickles", p: 2.00 }, { n: "Relish", p: 1.75 },
-        { n: "Salad Dressing", p: 2.50 }, { n: "Porridge", p: 3.00 }
+    const a=[
+        {n:"Milk",p:3.50},{n:"Bread",p:2.00},{n:"Eggs",p:2.50},
+        {n:"Sugar",p:1.50},{n:"Rice",p:1.75},{n:"Chicken",p:5.00},
+        {n:"Fish",p:6.00},{n:"Cheese",p:4.00},{n:"Chocolate",p:2.25},
+        {n:"Coffee",p:3.00},{n:"Tea",p:2.00},{n:"Juice",p:1.50},
+        {n:"Yogurt",p:2.00},{n:"Butter",p:3.25},{n:"Pasta",p:1.50},
+        {n:"Cereal",p:3.75},{n:"Ice Cream",p:4.00},{n:"Snacks",p:1.25},
+        {n:"Vegetables",p:2.50},{n:"Fruits",p:3.00},{n:"Nuts",p:4.50},
+        {n:"Chips",p:1.75},{n:"Ketchup",p:2.00},{n:"Mustard",p:1.50},
+        {n:"Vinegar",p:1.00},{n:"Olive Oil",p:6.00},{n:"Sauces",p:2.50},
+        {n:"Frozen Meals",p:5.50},{n:"Candy",p:1.00},{n:"Baking Powder",p:0.75},
+        {n:"Baking Soda",p:0.50},{n:"Pickles",p:2.00},{n:"Relish",p:1.75},
+        {n:"Salad Dressing",p:2.50},{n:"Porridge",p:3.00}
     ];
-
-    const y = [
-        { a: "123 Market St, Los Angeles, CA 90001", b: "(213) 555-0199" },
-        { a: "456 Super St, Chicago, IL 60601", b: "(312) 555-0144" },
-        { a: "789 Shopping Ave, New York, NY 10001", b: "(646) 555-0123" },
-        { a: "321 Convenience Blvd, Miami, FL 33101", b: "(305) 555-0178" },
-        { a: "654 Discount Rd, Dallas, TX 75201", b: "(214) 555-0111" },
-        { a: "111 Deal Rd, Seattle, WA 98101", b: "(206) 555-0188" },
-        { a: "222 Food St, San Francisco, CA 94101", b: "(415) 555-0166" },
-        { a: "333 Greenway Dr, Boston, MA 02101", b: "(617) 555-0155" },
-        { a: "444 Fresh St, Denver, CO 80201", b: "(303) 555-0191" },
-        { a: "555 Bright St, San Diego, CA 92101", b: "(619) 555-0142" },
-        { a: "666 Hilltop Rd, Portland, OR 97201", b: "(503) 555-0125" },
-        { a: "777 Central Blvd, Washington, D.C. 20001", b: "(202) 555-0145" }
+    const b=[
+        {a:"123 Market St, Los Angeles, CA 90001",t:"(213) 555-0199"},
+        {a:"456 Super St, Chicago, IL 60601",t:"(312) 555-0144"},
+        {a:"789 Shopping Ave, New York, NY 10001",t:"(646) 555-0123"},
+        {a:"321 Convenience Blvd, Miami, FL 33101",t:"(305) 555-0178"},
+        {a:"654 Discount Rd, Dallas, TX 75201",t:"(214) 555-0111"},
+        {a:"111 Deal Rd, Seattle, WA 98101",t:"(206) 555-0188"},
+        {a:"222 Food St, San Francisco, CA 94101",t:"(415) 555-0166"},
+        {a:"333 Greenway Dr, Boston, MA 02101",t:"(617) 555-0155"},
+        {a:"444 Fresh St, Denver, CO 80201",t:"(303) 555-0191"},
+        {a:"555 Bright St, San Diego, CA 92101",t:"(619) 555-0142"},
+        {a:"666 Hilltop Rd, Portland, OR 97201",t:"(503) 555-0125"},
+        {a:"777 Central Blvd, Washington, D.C. 20001",t:"(202) 555-0145"}
     ];
-
-    function z() { return y[Math.floor(Math.random() * y.length)]; }
-    
-    function A(b) {
-        JsBarcode("#r", b, { format: "CODE39", lineColor: "#000", width: 2, height: 40, displayValue: false });
-    }
-
-    function B() {
-        const C = document.querySelector("#v table");
-        C.innerHTML = `<tr class="e"><td class="g"><h2>Item</h2></td><td class="Hours"><h2>Qty</h2></td><td class="Rate"><h2>Sub Total</h2></td></tr>`;
-        const D = z();
-        const E = document.getElementById('m').value || "Supermarket Store";
-        document.getElementById('o').innerText = E;
-        const F = E.toLowerCase().replace(/\s+/g, '');
-        document.getElementById('p').innerText = `https://${F}/shop`;
-        document.getElementById('t').innerText = `Address: ${D.a}`;
-        document.getElementById('u').innerText = `Phone: ${D.b}`;
-        const G = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
-        document.getElementById('q').innerText = G.toLocaleString('en-US', options);
-        let total = 0;
-        const numItems = Math.floor(Math.random() * 5) + 2;
-
-        for (let i = 0; i < numItems; i++) {
-            const H = x[Math.floor(Math.random() * x.length)];
-            const I = Math.floor(Math.random() * 3) + 1;
-            const subtotal = (H.p * I).toFixed(2);
-            total += parseFloat(subtotal);
-            const row = document.createElement('tr');
-            row.className = 'f';
-            row.innerHTML = `<td class="tableitem"><p class="h">${H.n}</p></td><td class="tableitem"><p class="h">${I}</p></td><td class="tableitem"><p class="h">$${subtotal}</p></td>`;
-            C.appendChild(row);
+    function getRandomAddress(){return b[Math.floor(Math.random()*b.length)];}
+    function generateBarcode(code){JsBarcode("#barcode", code, {format:"CODE39",lineColor:"#000",width:1.2,height:20,displayValue:false});}
+    function generateReceipt() {
+        const itemListTable=document.querySelector("#itemList table");
+        itemListTable.innerHTML=`<tr class="header">
+            <td class="item-name"><h2>Item</h2></td>
+            <td class="quantity"><h2>Qty</h2></td>
+            <td class="subtotal"><h2>Sub Total</h2></td>
+        </tr>`;
+        const randomAddress=getRandomAddress();
+        const storeName=document.getElementById('storeName').value||"Supermarket Store";
+        document.getElementById('storeTitle').innerText=storeName;
+        const storeURL=`https://${storeName.toLowerCase().replace(/\s+/g,'')}/shop`;
+        document.getElementById('storeURL').innerText=storeURL;
+        document.getElementById('address').innerText=`Address: ${randomAddress.a}`;
+        document.getElementById('phone').innerText=`Phone: ${randomAddress.t}`;
+        const timestamp=new Date();
+        const options={year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:true};
+        document.getElementById('timestamp').innerText=timestamp.toLocaleString('en-US',options);
+        let total=0;
+        const numItems=Math.floor(Math.random()*5)+2;
+        for(let i=0;i<numItems;i++){
+            const item=a[Math.floor(Math.random()*a.length)];
+            const quantity=Math.floor(Math.random()*3)+1;
+            const subtotal=(item.p*quantity).toFixed(2);
+            total+=parseFloat(subtotal);
+            const row=document.createElement('tr');
+            row.className='row';
+            row.innerHTML=`<td class="tableitem"><p>${item.n}</p></td>
+                           <td class="tableitem"><p>${quantity}</p></td>
+                           <td class="tableitem"><p>$${subtotal}</p></td>`;
+            itemListTable.appendChild(row);
         }
-
-        const totalRow = document.createElement('tr');
-        totalRow.className = 'e';
-        totalRow.innerHTML = `<td></td><td class="Rate"><h2>Total</h2></td><td class="payment"><h2>$${total.toFixed(2)}</h2></td>`;
-        C.appendChild(totalRow);
-        const J = Math.random().toString(36).substring(2, 15);
-        A(J);
+        const totalRow=document.createElement('tr');
+        totalRow.className='header';
+        totalRow.innerHTML=`<td></td><td class="subtotal"><h2>Total</h2></td>
+                            <td class="payment"><h2>$${total.toFixed(2)}</h2></td>`;
+        itemListTable.appendChild(totalRow);
+        const barcodeCode=Math.random().toString(36).substring(2,15);
+        generateBarcode(barcodeCode);
     }
-
-    document.getElementById('n').addEventListener('click', B);
-
-    document.getElementById('w').addEventListener('click', () => {
-        html2canvas(document.querySelector("#a")).then(canvas => {
-            const K = document.createElement('a');
-            K.download = 'receipt.png';
-            K.href = canvas.toDataURL();
-            K.click();
-        });
-    });
+    document.getElementById('generateReceipt').addEventListener('click',generateReceipt);
+    document.getElementById('downloadReceipt').addEventListener('click',()=>{html2canvas(document.querySelector("#receipt")).then(canvas=>{const link=document.createElement('a');link.download='receipt.png';link.href=canvas.toDataURL();link.click();});});
 </script>
 </body>
 </html>
